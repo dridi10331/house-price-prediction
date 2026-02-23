@@ -53,12 +53,7 @@ jupyter notebook prediction.ipynb
 - scikit-learn
 - jupyter
 
-## Installation
 
-```bash
-pip install -r requirements.txt
-jupyter notebook
-```
 
 ## Results
 
