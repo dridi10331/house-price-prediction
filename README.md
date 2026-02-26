@@ -56,17 +56,26 @@ pip install pandas numpy scikit-learn streamlit jupyter catboost
 
 ## Run the Project
 
-### 1) Run the notebook
+### 1- Run the notebook
 
 ```bash
 jupyter notebook prediction.ipynb
 ```
 
-### 2) Run the Streamlit app
+### 2- Run the Streamlit app
 
 ```bash
 streamlit run streamlit_app.py
 ```
+
+## Requirements
+
+- pandas
+- numpy
+- scikit-learn
+- jupyter
+- streamlit
+- catboost
 
 ## Notes
 
