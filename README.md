@@ -1,70 +1,74 @@
-# Real Estate Price Prediction - Tunisia
+# Real Estate Price Prediction (Tunisia)
 
-A machine learning project following the CRISP-DM framework to predict real estate prices in Tunisia using regression and classification models.
+Machine learning project for Tunisian real-estate pricing using regression and classification, with a notebook workflow and a Streamlit inference app.
 
-## Project Overview
+## Overview
 
-This project analyzes 2,458 Tunisian properties and builds predictive models for property prices (TND - Tunisian Dinars).
+- Dataset size: 2,458 properties
+- Goal 1 (regression): predict property price in TND
+- Goal 2 (classification): predict price class (Low / High)
+- Methodology: CRISP-DM style workflow in `prediction.ipynb`
 
-### Dataset
-- **Records**: 2,458 properties
-- **Features**: 19 numeric features including:
-  - Property characteristics (Area, rooms, bathrooms, pieces)
-  - Location data (latitude, longitude, distance to capital)
-  - Amenities (pool, garden, elevator, furnished, etc.)
-- **Target**: `price_tnd` (Price in Tunisian Dinars)
+## Dataset
 
-## Models
+Main dataset: `dataset_clean.csv`
 
-### Regression Models
-1. **Linear Regression** - R² = 0.2840
-2. **Random Forest** - R² = 0.4808 (Best)
-3. **Gradient Boosting** - R² = 0.4428
+The project uses property and location features such as:
+- Property attributes (`Area`, `room`, `bathroom`, `pieces`)
+- Geospatial data (`latt`, `long`, `distance_to_capital`)
+- Amenities (`garage`, `pool`, `elevator`, `furnished`, etc.)
+- Categorical fields (`location`, `city`, `governorate`, `age`)
 
-### Classification Models
-- Predicts price categories: Low, Medium, High
+## Models and Artifacts
 
-## Top Features Influencing Price
+- `regression_model.pkl`: trained price regression model
+- `classification_model.pkl`: trained binary classification model
+- `preprocessing_artifacts.pkl`: preprocessing metadata (feature columns, target-encoding maps)
 
-1. **Area** (58.3%) - Most important
-2. **Latitude** (12.4%)
-3. **Longitude** (9.3%)
-4. **Bathrooms** (4.4%)
-5. **Pieces** (3.3%)
+## Model Performance
 
-## Files
+Metrics reported from `prediction.ipynb` test set evaluation:
 
-- `prediction.ipynb` - Complete CRISP-DM analysis and model training
-- `dataset_clean.csv` - Input dataset
-- `*.pkl` - Trained model files
+### Regression
 
-## Usage
+- Random Forest Regressor: `R² = 0.7328`, `MAE = 119,876 TND`
+- XGBoost Regressor: `R² = 0.7621`, `MAE = 112,514 TND` (best regression model)
 
-Run the Jupyter notebook to see the complete analysis:
+### Classification
+
+- Random Forest Classifier: `Accuracy = 0.8879` (88.79%)
+- Gradient Boosting Classifier: `Accuracy = 0.8789` (87.89%)
+
+## Project Files
+
+- `prediction.ipynb`: end-to-end analysis, preprocessing, training, and evaluation
+- `streamlit_app.py`: interactive inference interface
+- `dataset_clean.csv`: cleaned training/inference dataset
+- `catboost_info/`: CatBoost training logs and diagnostics
+
+## Installation
+
+Use your virtual environment (recommended) and install the required packages:
+
+```bash
+pip install pandas numpy scikit-learn streamlit jupyter catboost
+```
+
+## Run the Project
+
+### 1) Run the notebook
 
 ```bash
 jupyter notebook prediction.ipynb
 ```
 
-## Requirements
-
-- pandas
-- numpy
-- scikit-learn
-- jupyter
-
-## Installation
+### 2) Run the Streamlit app
 
 ```bash
-pip install -r requirements.txt
-jupyter notebook
+streamlit run streamlit_app.py
 ```
 
-## Results
+## Notes
 
-The Random Forest regression model achieved the best performance with R² = 0.4808 and MAE = 208,877 TND.
-
-Top 3 features directly influencing price:
-- Area (58.3%)
-- Latitude (12.4%)
-- Longitude (9.3%)
+- Keep `streamlit_app.py`, `dataset_clean.csv`, and all `.pkl` artifact files in the same project folder.
+- The app automatically loads category values from `dataset_clean.csv` and preprocessing settings from `preprocessing_artifacts.pkl`.
